@@ -32,24 +32,24 @@ const waves = new Waves({
     // Front wave - moves fastest and is most prominent
     {
       amplitude: 20,
-      frequency: 0.01,
+      frequency: 0.004,
       speed: 0.02,
       color: "hsla(0, 0%, 40%, 0.2)",
-      baseHeight: 0.85,
+      baseHeight: 0.9,
       verticalAmplitude: 8,
-      parallaxFactor: 1.0,
+      parallaxFactor: 1,
     },
-    // Middle wave - moderate movement
+    // Middle wave - moves slower than front wave
     {
       amplitude: 15,
-      frequency: 0.008,
+      frequency: 0.007,
       speed: 0.015,
       color: "hsla(0, 0%, 30%, 0.2)",
-      baseHeight: 0.7,
+      baseHeight: 0.71,
       verticalAmplitude: 12,
       parallaxFactor: 0.7,
     },
-    // Back wave - slowest movement
+    // Back wave - moves slowest and is least prominent
     {
       amplitude: 12,
       frequency: 0.01,
@@ -62,52 +62,8 @@ const waves = new Waves({
   ],
 });
 
-console.log("Waves initialized:", waves);
-
 // Initialize wave controls
 const waveControls = new WaveControls(waves);
 
 // Remove any existing content
 document.getElementById("app").innerHTML = "";
-
-// Example of how to update wave parameters dynamically
-// Uncomment to see waves change after 3 seconds
-/*
-setTimeout(() => {
-  waves.setWaveParameters(0, {
-    amplitude: 30,
-    frequency: 0.03,
-    speed: 0.06
-  });
-}, 3000);
-*/
-
-[
-  {
-    amplitude: 20,
-    frequency: 0.01,
-    speed: 0.02,
-    color: "hsla(0, 0%, 40%, 0.2)",
-    baseHeight: 0.85,
-    verticalAmplitude: 8,
-    parallaxFactor: 1,
-  },
-  {
-    amplitude: 15,
-    frequency: 0.008,
-    speed: 0.015,
-    color: "hsla(0, 0%, 30%, 0.2)",
-    baseHeight: 0.7,
-    verticalAmplitude: 12,
-    parallaxFactor: 0.7,
-  },
-  {
-    amplitude: 14,
-    frequency: 0.01,
-    speed: 0.01,
-    color: "hsla(0, 0%, 20%, 0.2)",
-    baseHeight: 0.57,
-    verticalAmplitude: 17,
-    parallaxFactor: 0.4,
-  },
-];
