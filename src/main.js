@@ -1,11 +1,11 @@
-import './style.css'
-import { Waves } from './components/Waves';
+import "./style.css";
+import { Waves } from "./components/Waves";
 
-console.log('Main.js is loading...');
+console.log("Main.js is loading...");
 
 // Create container for waves
-const container = document.createElement('div');
-container.id = 'waves-container';
+const container = document.createElement("div");
+container.id = "waves-container";
 container.style.cssText = `
   position: fixed;
   bottom: 0;
@@ -20,9 +20,9 @@ container.style.cssText = `
 document.body.appendChild(container);
 
 // Set body background to black
-document.body.style.background = '#000000';
+document.body.style.background = "#262626";
 
-console.log('Waves container created:', container);
+console.log("Waves container created:", container);
 
 // Initialize waves with custom configuration
 const waves = new Waves({
@@ -33,38 +33,38 @@ const waves = new Waves({
       amplitude: 20,
       frequency: 0.01,
       speed: 0.02,
-      color: 'rgba(0, 153, 255, 0.5)',
-      baseHeight: 0.8,
+      color: "hsla(0, 0%, 40%, 0.2)",
+      baseHeight: 0.85,
       verticalAmplitude: 8,
-      parallaxFactor: 1.0
+      parallaxFactor: 1.0,
     },
     // Middle wave - moderate movement
     {
       amplitude: 15,
       frequency: 0.008,
       speed: 0.015,
-      color: 'rgba(0, 102, 204, 0.4)',
+      color: "hsla(0, 0%, 30%, 0.2)",
       baseHeight: 0.7,
       verticalAmplitude: 12,
-      parallaxFactor: 0.7
+      parallaxFactor: 0.7,
     },
     // Back wave - slowest movement
     {
       amplitude: 12,
       frequency: 0.01,
       speed: 0.01,
-      color: 'rgba(0, 51, 153, 0.3)',
+      color: "hsla(0, 0%, 20%, 0.2)",
       baseHeight: 0.6,
       verticalAmplitude: 15,
-      parallaxFactor: 0.4
-    }
-  ]
+      parallaxFactor: 0.4,
+    },
+  ],
 });
 
-console.log('Waves initialized:', waves);
+console.log("Waves initialized:", waves);
 
 // Remove any existing content
-document.getElementById('app').innerHTML = '';
+document.getElementById("app").innerHTML = "";
 
 // Example of how to update wave parameters dynamically
 // Uncomment to see waves change after 3 seconds
@@ -77,4 +77,3 @@ setTimeout(() => {
   });
 }, 3000);
 */
-
