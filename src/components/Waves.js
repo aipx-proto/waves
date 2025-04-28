@@ -1,5 +1,3 @@
-// import './waves.css';
-
 /**
  * Creates an animated wave background using Canvas.
  * Each wave layer can have its own properties for amplitude, speed, and movement.
@@ -9,17 +7,17 @@ export class Waves {
    * Default configuration for a wave layer
    */
   static defaultWaveConfig = {
-    amplitude: 20,         // Height of the wave
-    frequency: 0.02,      // How many waves appear across the width
-    phase: 0,             // Starting position offset
-    speed: 0.05,         // How fast the wave moves
-    color: 'rgba(33, 150, 243, 0.6)',
-    baseHeight: 0.6,      // Vertical position in the container (0 = top, 1 = bottom)
+    amplitude: 20, // Height of the wave
+    frequency: 0.02, // How many waves appear across the width
+    phase: 0, // Starting position offset
+    speed: 0.05, // How fast the wave moves
+    color: "rgba(33, 150, 243, 0.6)",
+    baseHeight: 0.6, // Vertical position in the container (0 = top, 1 = bottom)
     verticalAmplitude: 10, // How much the entire wave moves up and down
-    verticalFreq: 0.02,   // Speed of vertical movement
-    verticalPhase: 0,     // Vertical movement offset
-    heightScale: 1.0,     // Overall height multiplier
-    parallaxFactor: 1.0   // Movement speed relative to other layers (1 = fastest)
+    verticalFreq: 0.02, // Speed of vertical movement
+    verticalPhase: 0, // Vertical movement offset
+    heightScale: 1.0, // Overall height multiplier
+    parallaxFactor: 1.0, // Movement speed relative to other layers (1 = fastest)
   };
 
   /**
@@ -35,9 +33,9 @@ export class Waves {
         // Front wave
         {
           ...Waves.defaultWaveConfig,
-          color: 'rgba(33, 150, 243, 0.6)',
+          color: "rgba(33, 150, 243, 0.6)",
           baseHeight: 0.75,
-          parallaxFactor: 1.0
+          parallaxFactor: 1.0,
         },
         // Middle wave
         {
@@ -46,10 +44,10 @@ export class Waves {
           frequency: 0.015,
           phase: 2,
           speed: 0.03,
-          color: 'rgba(33, 150, 243, 0.4)',
+          color: "rgba(33, 150, 243, 0.4)",
           baseHeight: 0.65,
           verticalAmplitude: 15,
-          parallaxFactor: 0.7
+          parallaxFactor: 0.7,
         },
         // Back wave
         {
@@ -58,13 +56,13 @@ export class Waves {
           frequency: 0.01,
           phase: 4,
           speed: 0.02,
-          color: 'rgba(33, 150, 243, 0.2)',
+          color: "rgba(33, 150, 243, 0.2)",
           baseHeight: 0.55,
           verticalAmplitude: 20,
-          parallaxFactor: 0.4
-        }
+          parallaxFactor: 0.4,
+        },
       ],
-      ...options
+      ...options,
     };
 
     this.init();
@@ -75,17 +73,17 @@ export class Waves {
    */
   init() {
     if (!this.options.container) {
-      throw new Error('Container element is required');
+      throw new Error("Container element is required");
     }
 
-    console.log('Initializing waves with container:', this.options.container);
+    console.log("Initializing waves with container:", this.options.container);
 
     // Setup canvas
-    this.canvas = document.createElement('canvas');
-    this.ctx = this.canvas.getContext('2d', {
-      alpha: true  // Enable transparency
+    this.canvas = document.createElement("canvas");
+    this.ctx = this.canvas.getContext("2d", {
+      alpha: true, // Enable transparency
     });
-    
+
     // Ensure canvas takes full container size
     this.canvas.style.cssText = `
       position: absolute;
@@ -95,26 +93,26 @@ export class Waves {
       height: 100%;
       display: block;
     `;
-    
-    this.options.container.innerHTML = '';
+
+    this.options.container.innerHTML = "";
     this.options.container.appendChild(this.canvas);
 
-    console.log('Canvas created with size:', {
+    console.log("Canvas created with size:", {
       width: this.canvas.width,
       height: this.canvas.height,
       styleWidth: this.canvas.style.width,
-      styleHeight: this.canvas.style.height
+      styleHeight: this.canvas.style.height,
     });
 
     // Handle window resizing
     this.resize();
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener("resize", () => this.resize());
 
     // Initialize animation timing
     this.time = 0;
     this.lastTime = performance.now();
-    
-    console.log('Starting animation loop');
+
+    console.log("Starting animation loop");
     this.animate();
   }
 
@@ -126,12 +124,12 @@ export class Waves {
     const rect = container.getBoundingClientRect();
     this.canvas.width = rect.width;
     this.canvas.height = rect.height;
-    
-    console.log('Canvas resized:', {
+
+    console.log("Canvas resized:", {
       containerWidth: rect.width,
       containerHeight: rect.height,
       canvasWidth: this.canvas.width,
-      canvasHeight: this.canvas.height
+      canvasHeight: this.canvas.height,
     });
   }
 
@@ -143,7 +141,7 @@ export class Waves {
   calculateHeightVariation(position) {
     return (
       Math.sin(position * 0.5) * 0.3 + // Slower wave with 30% influence
-      Math.sin(position * 0.25) * 0.2   // Even slower wave with 20% influence
+      Math.sin(position * 0.25) * 0.2 // Even slower wave with 20% influence
     );
   }
 
@@ -153,18 +151,29 @@ export class Waves {
    * @param {number} waveIndex Index of the wave layer
    */
   drawWave(wave, waveIndex) {
-    const { 
-      amplitude, frequency, phase, speed, color, baseHeight,
-      verticalAmplitude, verticalFreq, verticalPhase, heightScale,
-      parallaxFactor
+    const {
+      amplitude,
+      frequency,
+      phase,
+      speed,
+      color,
+      baseHeight,
+      verticalAmplitude,
+      verticalFreq,
+      verticalPhase,
+      heightScale,
+      parallaxFactor,
     } = wave;
-    
+
     const { width, height } = this.canvas;
-    
+
     // Calculate vertical oscillation
-    const verticalOffset = verticalAmplitude * Math.sin(
-      (this.time * (verticalFreq || 0.02) * parallaxFactor) + (verticalPhase || 0)
-    );
+    const verticalOffset =
+      verticalAmplitude *
+      Math.sin(
+        this.time * (verticalFreq || 0.02) * parallaxFactor +
+          (verticalPhase || 0)
+      );
 
     // Begin drawing path
     this.ctx.beginPath();
@@ -174,14 +183,16 @@ export class Waves {
     const steps = Math.ceil(width);
     for (let i = 0; i <= steps; i++) {
       const x = (i / steps) * width;
-      const wavePos = (x * frequency) + (this.time * speed * parallaxFactor) + (phase || 0);
-      
+      const wavePos =
+        x * frequency + this.time * speed * parallaxFactor + (phase || 0);
+
       // Calculate wave height with simple sine wave
       const waveHeight = Math.sin(wavePos) * amplitude * (heightScale || 1.0);
 
       // Calculate final position
-      const y = (height * baseHeight) + (verticalOffset * parallaxFactor) + waveHeight;
-      
+      const y =
+        height * baseHeight + verticalOffset * parallaxFactor + waveHeight;
+
       if (i === 0) {
         this.ctx.moveTo(x, y);
       } else {
@@ -207,7 +218,7 @@ export class Waves {
     const currentTime = performance.now();
     const deltaTime = (currentTime - this.lastTime) / 1000;
     this.lastTime = currentTime;
-    
+
     // Update animation time
     this.time += deltaTime * 50;
 
@@ -221,7 +232,7 @@ export class Waves {
     });
 
     requestAnimationFrame(this.animate);
-  }
+  };
 
   /**
    * Update parameters for a specific wave layer
@@ -232,7 +243,7 @@ export class Waves {
     if (waveIndex >= 0 && waveIndex < this.options.waves.length) {
       this.options.waves[waveIndex] = {
         ...this.options.waves[waveIndex],
-        ...parameters
+        ...parameters,
       };
     }
   }
@@ -244,4 +255,4 @@ export class Waves {
   setWaves(waves) {
     this.options.waves = waves;
   }
-} 
+}

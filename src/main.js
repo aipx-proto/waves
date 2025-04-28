@@ -1,5 +1,6 @@
 import "./style.css";
 import { Waves } from "./components/Waves";
+import { WaveControls } from "./components/WaveControls";
 
 console.log("Main.js is loading...");
 
@@ -63,6 +64,9 @@ const waves = new Waves({
 
 console.log("Waves initialized:", waves);
 
+// Initialize wave controls
+const waveControls = new WaveControls(waves);
+
 // Remove any existing content
 document.getElementById("app").innerHTML = "";
 
@@ -77,3 +81,33 @@ setTimeout(() => {
   });
 }, 3000);
 */
+
+[
+  {
+    amplitude: 20,
+    frequency: 0.01,
+    speed: 0.02,
+    color: "hsla(0, 0%, 40%, 0.2)",
+    baseHeight: 0.85,
+    verticalAmplitude: 8,
+    parallaxFactor: 1,
+  },
+  {
+    amplitude: 15,
+    frequency: 0.008,
+    speed: 0.015,
+    color: "hsla(0, 0%, 30%, 0.2)",
+    baseHeight: 0.7,
+    verticalAmplitude: 12,
+    parallaxFactor: 0.7,
+  },
+  {
+    amplitude: 14,
+    frequency: 0.01,
+    speed: 0.01,
+    color: "hsla(0, 0%, 20%, 0.2)",
+    baseHeight: 0.57,
+    verticalAmplitude: 17,
+    parallaxFactor: 0.4,
+  },
+];
