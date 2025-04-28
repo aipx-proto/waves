@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .wave-controls {
   position: fixed;
   top: 20px;
@@ -13,10 +19,12 @@
   padding: 20px;
   color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  width: 280px;
 }
 
 .layer-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -30,7 +38,6 @@
 }
 
 .layer-selector select {
-  width: 100%;
   padding: 8px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -45,6 +52,9 @@
 }
 
 .control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
 }
 
@@ -59,6 +69,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 0 0 0 1rem;
 }
 
 .control input[type="range"] {
