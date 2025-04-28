@@ -1,44 +1,76 @@
 import "./WaveControls.css";
 
 export class WaveControls {
-  constructor(wavesInstance) {
+  constructor(wavesInstance, onUpdate) {
     this.waves = wavesInstance;
+    this.onUpdate = onUpdate;
     this.container = document.createElement("div");
     this.container.className = "wave-controls";
     this.currentWaveIndex = 0; // Track current wave index
+    this.isVisible = false;
     this.init();
   }
 
   init() {
+    // Create config button
+    this.configButton = document.createElement("button");
+    this.configButton.className = "config-button";
+    this.configButton.textContent = "⚙";
+    this.configButton.addEventListener("click", () => this.togglePanel());
+    this.container.appendChild(this.configButton);
+
     // Create the main panel
-    const panel = document.createElement("div");
-    panel.className = "control-panel";
+    this.panel = document.createElement("div");
+    this.panel.className = "control-panel";
+
+    // Create panel header with close button
+    const panelHeader = document.createElement("div");
+    panelHeader.className = "panel-header";
+
+    const closeButton = document.createElement("button");
+    closeButton.className = "close-button";
+    closeButton.textContent = "×";
+    closeButton.addEventListener("click", () => this.togglePanel());
+    panelHeader.appendChild(closeButton);
+
+    this.panel.appendChild(panelHeader);
 
     // Add wave count control
     const waveCountControl = this.createWaveCountControl();
-    panel.appendChild(waveCountControl);
+    this.panel.appendChild(waveCountControl);
 
     // Add wave layer selector
     const layerSelector = this.createLayerSelector();
-    panel.appendChild(layerSelector);
+    this.panel.appendChild(layerSelector);
 
     // Add controls container
     const controlsContainer = document.createElement("div");
     controlsContainer.className = "controls-container";
-    panel.appendChild(controlsContainer);
+    this.panel.appendChild(controlsContainer);
 
     // Add JSON export button
     const exportButton = this.createExportButton();
-    panel.appendChild(exportButton);
+    this.panel.appendChild(exportButton);
 
     // Add the panel to the container
-    this.container.appendChild(panel);
+    this.container.appendChild(this.panel);
 
     // Add to document
     document.body.appendChild(this.container);
 
     // Initialize controls for the first wave
     this.updateControls(0);
+  }
+
+  togglePanel() {
+    this.isVisible = !this.isVisible;
+    if (this.isVisible) {
+      this.panel.classList.add("visible");
+      this.configButton.classList.add("hidden");
+    } else {
+      this.panel.classList.remove("visible");
+      this.configButton.classList.remove("hidden");
+    }
   }
 
   createWaveCountControl() {

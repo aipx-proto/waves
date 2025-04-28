@@ -13,12 +13,75 @@
     sans-serif;
 }
 
+.config-button {
+  background: rgba(0, 0, 0, 0.85);
+  border: none;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.2s, opacity 0.3s ease;
+  font-size: 20px;
+}
+
+.config-button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.config-button:hover {
+  background: rgba(0, 0, 0, 0.95);
+}
+
 .control-panel {
   background: rgba(0, 0, 0, 0.85);
   border-radius: 12px;
   padding: 20px;
   color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.control-panel.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .layer-selector {
