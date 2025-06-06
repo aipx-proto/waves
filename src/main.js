@@ -21,7 +21,7 @@ container.style.cssText = `
 document.body.appendChild(container);
 
 // Set body background to black
-document.body.style.background = "#262626";
+// document.body.style.background = "#262626";
 
 console.log("Waves container created:", container);
 
